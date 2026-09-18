@@ -1,57 +1,91 @@
-## Loan Default Prediction (VaultSense)
+# Loan Default Prediction
 
-**Repository:** `loan-default-prediction`
+End-to-end machine learning project on a realistic synthetic credit-risk dataset — covering EDA, data cleaning, feature engineering, model training, evaluation, and hyperparameter tuning across five classification algorithms.
 
-## What this project does
+**Repo:** https://github.com/sekharvijay17/loan-default-prediction
 
-This project predicts whether a customer will **default on their loan** or not.
+---
 
-In simple words: given information about a person (income, credit score, loan amount, job history, etc.), the model tries to answer one question —
+## 📌 Project Overview
 
-> **Will this person default on their loan? Yes or No?**
+This project simulates a real-world loan default risk assessment problem. The dataset (10,000 rows × 20 features + 1 target) is synthetic but intentionally messy — containing missing values, categorical typos, outliers, and skewed distributions — to mirror the kind of preprocessing challenges seen in production data science work.
 
-## What I am predicting
+**Target variable:** `target_default_risk` (binary — 1 = Default, 0 = No Default)
 
-The target column is `target_default_risk`:
-- `0` = Customer will **NOT** default (safe)
-- `1` = Customer **WILL** default (risky)
+**Goal:** Predict whether a borrower will default, and compare how different models and preprocessing choices affect performance.
 
-## About the dataset
+---
 
-- 10,000 customers
-- 20 features + 1 target column
-- Some features used:
-  - `age`, `income`, `savings`, `credit_score`
-  - `loan_amount`, `loan_term_months`
-  - `employment_years`, `home_ownership`
-  - `education`, `marital_status`, `region`
-  - `debt_to_income`, `has_credit_card`, `recent_default`
-- The data is messy on purpose (missing values, typos, outliers) — just like real-world data.
+## 🗂️ Repository Structure
 
-## Steps I followed
+```
+loan-default-prediction/
+├── generate_data.py       
+├── preprocessing.py       
+├── requirements.txt
+└── README.md
+```
 
-1. **Explore the data** – look at the numbers, charts, and missing values.
-2. **Clean the data** – fix typos, fill missing values, handle outliers.
-3. **Prepare the data** – convert text columns into numbers, scale the numeric ones.
-4. **Train models** – try 5 different models:
+---
+
+## 🔍 Workflow
+
+1. **Exploratory Data Analysis** — shape, dtypes, missing values, distributions, outliers, correlations, class balance.
+2. **Data Preprocessing** — missing value imputation, fixing categorical typos (e.g. "Bachlors" → "Bachelors"), outlier capping (winsorization), one-hot/ordinal encoding, feature scaling, and feature engineering (e.g. `debt_to_income`, recency from `signup_date`, income per dependent).
+3. **Model Building** — trained and evaluated:
    - Logistic Regression
    - Decision Tree
    - Support Vector Machine (SVM)
    - Random Forest
    - XGBoost
-5. **Check performance** – using accuracy, precision, recall, F1-score.
-6. **Improve models** – tune settings using GridSearchCV to get better results.
+4. **Evaluation** — accuracy, precision, recall, F1-score, and confusion matrices for every model.
+5. **Hyperparameter Tuning** — GridSearchCV / RandomizedSearchCV, focused on Random Forest and XGBoost, with baseline-vs-tuned comparison.
 
-## What I learned
+---
 
-- Cleaning messy data takes more effort than training the model itself.
-- Accuracy alone can be misleading — recall matters a lot here, because missing an actual defaulter is worse than a false alarm.
-- Simple models (Logistic Regression) give a good starting point, but tree-based models (Random Forest, XGBoost) usually perform better on this kind of data.
+## 📊 Results Summary
 
-## Project status
+| Model | Accuracy (baseline) | Accuracy (tuned) |
+|---|---|---|
+| Logistic Regression | ~ | — |
+| Decision Tree | ~ | ~ |
+| SVM | ~ | — |
+| Random Forest | ~ | ~ |
+| XGBoost | ~ | ~ |
 
-🚧 In progress — EDA and cleaning done, model training next.
+*(Full metrics, confusion matrices, and discussion are in `reports/report.md` and the notebook.)*
 
-## Author
+---
 
-Made as part of my Machine Learning coursework.
+## ⚙️ Setup & Usage
+
+```bash
+git clone https://github.com/sekharvijay17/loan-default-prediction.git
+cd loan-default-prediction
+pip install -r requirements.txt
+python generate_data.py
+python preprocessing.py
+```
+
+---
+
+## 🛠️ Tech Stack
+
+- Python 3
+- pandas, numpy
+- scikit-learn
+- xgboost
+- matplotlib, seaborn
+
+---
+
+## 📝 Notes
+
+- The dataset is synthetic, generated to mimic realistic data quality issues (missing values, typos, outliers) for learning purposes — it does not represent real borrowers.
+- Benchmark accuracy targets in the assignment are approximate; actual results depend on preprocessing and tuning choices, documented in the report.
+
+---
+
+## 📄 License
+
+This project is for educational purposes.
